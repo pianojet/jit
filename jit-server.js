@@ -104,16 +104,16 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 // login/session -----------------
 app.get('/login', function(req, res) {
     // render the page and pass in any flash data if it exists
-    res.sendfile('./public/login.html'); 
+    res.render('./public/login.ejs'); 
 });
 
 app.get('/signup', function(req, res) {
     // render the page and pass in any flash data if it exists
-    res.sendfile('./public/signup.html');
+    res.render('./public/signup.ejs');
 });
 
 app.get('/profile', isLoggedIn, function(req, res) {
-    res.sendfile('./public/profile.html', {
+    res.render('./public/profile.ejs', {
         user : req.user // get the user out of session and pass to template
     });
 });
@@ -124,8 +124,8 @@ app.get('/logout', function(req, res) {
 });
 
 
-app.get('*', function(req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+app.get('/', function(req, res) {
+    res.render('./public/index.ejs'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 // listen (start app with node server.js) ======================================
