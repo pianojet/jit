@@ -1,13 +1,16 @@
 {
-  "name"         : "node-todo",
-  "version"      : "0.0.0",
-  "description"  : "Simple todo application.",
-  "main"         : "server.js",
-  "author"       : "Scotch",
+  "name": "node-todo",
+  "version": "0.0.0",
+  "description": "JET + FIT = JIT",
+  "main": "jit-server.js",
+  "author": "Justin",
   "dependencies" : {
-    "express"    : "4.x",
-    "mongoose"   : "~3.6.2",
+    "express": "~3.4.4",
+    "ejs": "~0.8.5",
+    "mongoose": "~3.6.2",
     "async": "0.2.10",
-    "passport": "*"
+    "passport": "*",
+    "passport-local": "*",
+    "passport-facebook": "*"
     }
 }

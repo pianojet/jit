@@ -40,3 +40,7 @@ function mainController($scope, $http) {
     };
 
 }
+
+function loginController($scope, $http) {
+    
+}
