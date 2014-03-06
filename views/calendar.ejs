@@ -2,25 +2,43 @@
 <!doctype html>
 <html data-ng-app="">
 <head>
-	<title>Calendar</title>
+    <title>Calendar</title>
 
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="styles/core.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="styles/core.css" />
 
 </head>
 <body>
 
-	<div class="top-header">
-		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-	</div>
-	<div id="calendar_container" class="container" data-ng-controller="CalendarController">
-		<h3>Calendar</h3>
-	</div>
+    <div class="top-header">
+        <a href="/logout" class="btn btn-default btn-sm fr">Logout</a>
+    </div>
+    <div class="cl"></div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-	<script src="controllers/calendar.js"></script>
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#">Calendar</a></li>
+        <li><a href="#">Week</a></li>
+        <li><a href="#">Day</a></li>
+    </ul>
+    
+    <div id="calendar_container" class="container" data-ng-controller="CalendarController">
+        <h3>Calendar</h3>
+    </div>
+
+    <div id="week_container" class="container" data-ng-controller="WeekController">
+        <h3>Week</h3>
+    </div>
+
+    <div id="day_container" class="container" data-ng-controller="DayController">
+        <h3>Day</h3>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="controllers/calendar.js"></script>
+    <script src="controllers/week.js"></script>
+    <script src="controllers/day.js"></script>
 </body>
 </html>
 
