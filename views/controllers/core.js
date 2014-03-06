@@ -17,10 +17,15 @@ jitapp.config([ '$routeProvider', '$locationProvider', function($routeProvider, 
             controller: 'DayController',
             templateUrl: '/views/templates/day.partial.html'
         })
+        .when('/logout', {controller: 'LogoutController'})
         .otherwise({ redirectTo: '/'});
         $locationProvider.html5Mode(true);
 }]);
 
+jitapp.controller('LogoutController', function($location) {
+    Session.clear();
+    $location.path('/home');
+}
 
 jitapp.controller('NavController', function($scope, $location){
     $scope.isActive = function (viewLocation) { 

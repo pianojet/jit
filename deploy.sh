@@ -42,7 +42,7 @@ if [ ! -z "$ARG" -a ! -z "$ENV_STAGE" ]; then
 			tail -n10 $ERRORLOG
 		else
 			P="`ps -ef | grep "$SERVER" | grep -v grep | awk '{print $2}'`"
-			echo " $APP> Deployed, process $P"
+			print "Deployed, process $P"
 		fi
 		exit 0
 	fi
