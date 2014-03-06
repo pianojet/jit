@@ -45,11 +45,17 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/calendar', isLoggedIn, function(req, res) {
+    app.get('/calendar', function(req, res) {
         res.render('calendar.ejs', {
             user : req.user // get the user out of session and pass to template
         });
     });    
+
+    // app.get('/calendar', isLoggedIn, function(req, res) {
+    //     res.render('calendar.ejs', {
+    //         user : req.user // get the user out of session and pass to template
+    //     });
+    // });    
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {

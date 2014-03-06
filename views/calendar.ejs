@@ -1,6 +1,6 @@
 <!-- views/profile.ejs -->
 <!doctype html>
-<html data-ng-app="">
+<html data-ng-app="jitapp">
 <head>
     <title>Calendar</title>
 
@@ -16,11 +16,18 @@
     </div>
     <div class="cl"></div>
 
-    <ul class="nav nav-pills">
+<!--     <ul class="nav nav-pills">
         <li class="active"><a href="#">Calendar</a></li>
         <li><a href="#">Week</a></li>
         <li><a href="#">Day</a></li>
     </ul>
+ -->
+    <ul class="nav nav-pills" data-ng-controller="NavController">
+        <li ng-class="{ active: isActive('/View1') }"><a href="/View1">Calendar</a></li>
+        <li ng-class="{ active: isActive('/View2') }"><a href="/View2">Week</a></li>
+        <li ng-class="{ active: isActive('/View3') }"><a href="/View3">Day</a></li>
+    </ul>
+
     
     <div id="calendar_container" class="container" data-ng-controller="CalendarController">
         <h3>Calendar</h3>
@@ -36,6 +43,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="controllers/core.js"></script>
     <script src="controllers/calendar.js"></script>
     <script src="controllers/week.js"></script>
     <script src="controllers/day.js"></script>

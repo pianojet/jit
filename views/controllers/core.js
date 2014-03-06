@@ -1,46 +1,40 @@
-// views/core.js
-var scotchTodo = angular.module('scotchTodo', []);
+var jitapp = angular.module("jitapp", []);
 
-function mainController($scope, $http) {
-    $scope.formData = {};
+var controllers = {};
 
-    // when landing on the page, get all todos and show them
-    $http.get('/api/todos')
-        .success(function(data) {
-            $scope.todos = data;
-            console.log(data);
+controllers.NavController = function($scope, $location) {
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
+}
+
+controllers.CalendarController = function($scope) {
+}
+
+controllers.WeekController = function($scope) {
+}
+
+controllers.DayController = function($scope) {
+}
+
+jitapp.controller(controllers);
+
+jitapp.config(function($routeProvider) {
+    $routeProvider
+        .when('/',
+        {
+            controller: 'CalendarController',
+            templateUrl: 'calendar.partial.html'
         })
-        .error(function(data) {
-            console.log('Error: ' + data);
-        });
-
-    // when submitting the add form, send the text to the node API
-    $scope.createTodo = function() {
-        $http.post('/api/todos', $scope.formData)
-            .success(function(data) {
-                $scope.formData = {}; // clear the form so our user is ready to enter another
-                $scope.todos = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
-
-    // delete a todo after checking it
-    $scope.deleteTodo = function(id) {
-        $http.delete('/api/todos/' + id)
-            .success(function(data) {
-                $scope.todos = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
-
-}
-
-function loginController($scope, $http) {
-    
-}
+        .when('/week',
+        {
+            controller: 'WeekController',
+            templateUrl: 'week.partial.html'
+        }
+        .when('/day',
+        {
+            controller: 'DayController',
+            templateUrl: 'day.partial.html'
+        }
+        .otherwise({ redirectTo: '/'})
+});
