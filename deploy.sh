@@ -1,14 +1,20 @@
 #!/bin/bash
-APP=jit
-SERVER="$APP-server.js"
+
+ENV_STAGE=$1
+ARG=$2
+
+APP="jit"
+APP_ENV="$APP-$ENV_STAGE"
+SERVER="$APP_ENV-server.js"
 LOG=/var/log/node
-ACCESSLOG=$LOG/$APP-test-access.log
-ERRORLOG=$LOG/$APP-test-error.log
-PMT=" $APP> "
-ARG=$1
+ACCESSLOG=$LOG/$APP_ENV-access.log
+ERRORLOG=$LOG/$APP_ENV-error.log
+PMT=" $APP_ENV> "
+
+
 
 function print {
-	echo " $APP> $1"
+	echo " $PMT> $1"
 }
 
 function halt {
@@ -21,7 +27,7 @@ function halt {
     return 1
 }
 
-if [ ! -z "$ARG" ]; then
+if [ ! -z "$ARG" -a ! -z "$ENV_STAGE" ]; then
 	if [ "$ARG" == "stop" ]; then
 		halt
 		if [ $? -ne 0 ]; then
