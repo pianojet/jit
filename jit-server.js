@@ -11,12 +11,16 @@ var flash    = require('connect-flash');
 
 var configDB = require('./config/database.js');
 
+
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
 app.configure(function() {
+
+    app.use('/views', express.static('views'));
 
     // set up our express application
     app.use(express.logger('dev')); // log every request to the console
@@ -32,6 +36,16 @@ app.configure(function() {
     app.use(flash()); // use connect-flash for flash messages stored in session
 
 });
+
+// app.use(express.static(__dirname+'/views/templates'));
+// app.use(express.static(__dirname+'/views/styles'));
+// app.use(express.static(__dirname+'/views/services'));
+// app.use(express.static(__dirname+'/views/directives'));
+// app.use(express.static(__dirname+'/views/filters'));
+//app.use(express.static(__dirname+'/views/controllers/core.js'));
+//app.use("/views/controllers", express.static(__dirname + '/views/controllers/core.js'));
+
+
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport

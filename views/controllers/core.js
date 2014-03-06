@@ -1,40 +1,80 @@
-var jitapp = angular.module("jitapp", []);
+var jitapp = angular.module("jitapp", ['ngRoute']);
 
-var controllers = {};
-
-controllers.NavController = function($scope, $location) {
-    $scope.isActive = function (viewLocation) { 
-        return viewLocation === $location.path();
-    };
-}
-
-controllers.CalendarController = function($scope) {
-}
-
-controllers.WeekController = function($scope) {
-}
-
-controllers.DayController = function($scope) {
-}
-
-jitapp.controller(controllers);
-
-jitapp.config(function($routeProvider) {
+jitapp.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/',
+        .when('/profile/calendar',
         {
             controller: 'CalendarController',
-            templateUrl: 'calendar.partial.html'
+            templateUrl: '/views/templates/calendar.partial.html'
         })
-        .when('/week',
+        .when('/profile/week',
         {
             controller: 'WeekController',
-            templateUrl: 'week.partial.html'
-        }
-        .when('/day',
+            templateUrl: '/views/templates/week.partial.html'
+        })
+        .when('/profile/day',
         {
             controller: 'DayController',
-            templateUrl: 'day.partial.html'
-        }
-        .otherwise({ redirectTo: '/'})
+            templateUrl: '/views/templates/day.partial.html'
+        })
+        .otherwise({ redirectTo: '/'});
+        $locationProvider.html5Mode(true);
+}]);
+
+
+jitapp.controller('NavController', function($scope, $location){
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };    
 });
+
+jitapp.controller('CalendarController', function($scope){
+
+});
+
+jitapp.controller('WeekController', function($scope){
+
+});
+
+jitapp.controller('DayController', function($scope){
+
+});
+
+// function NavController($scope, $location) {
+//     $scope.isActive = function (viewLocation) { 
+//         return viewLocation === $location.path();
+//     };    
+// }
+
+// function CalendarController($scope) {
+
+// }
+
+// function WeekController($scope) {
+    
+// }
+
+// function DayController($scope) {
+    
+// }
+
+// var controllers = {};
+
+// controllers.NavController = function($scope) {
+//     // $scope.isActive = function (viewLocation) { 
+//     //     return viewLocation === $location.path();
+//     // };
+// };
+
+// controllers.CalendarController = function($scope) {
+// };
+
+// controllers.WeekController = function($scope) {
+// };
+
+// controllers.DayController = function($scope) {
+// };
+
+// jitapp.controller(controllers);
+
+

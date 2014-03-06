@@ -1,41 +1,67 @@
 <!-- views/profile.ejs -->
 <!doctype html>
-<html>
+<html data-ng-app="jitapp">
 <head>
-	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
-	</style>
+    <title>Calendar</title>
+    <base href="/" />
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="/views/styles/core.css" />
+
+
+<!--    <script type="application/javascript" src="/views/controllers/calendar.js"></script>
+    <script type="application/javascript" src="/views/controllers/week.js"></script>
+    <script type="application/javascript" src="/views/controllers/day.js"></script> -->
+
 </head>
 <body>
-<div class="container">
-
-	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-	</div>
-
-	<div class="row">
-
-		<!-- LOCAL INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
-
-					<p>
+    <div class="content_container">
+        <div>
+<!--					<p>
 						<strong>id</strong>: <%= user._id %><br>
 						<strong>email</strong>: <%= user.local.email %><br>
 						<strong>password</strong>: <%= user.local.password %>
 					</p>
+-->
 
-			</div>
-		</div>
+            <div class="top-header fr">
+                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            </div>
 
-	</div>
+            <div class="welcome_user fr">
+            	Welcome <%= user.local.email %>
+           	</div>
 
-</div>
+
+            <div class="fl">
+                <ul class="nav nav-pills" data-ng-controller="NavController">
+                    <li ng-class="{ active: isActive('/profile/calendar') }"><a href="/profile/calendar">Calendar</a></li>
+                    <li ng-class="{ active: isActive('/profile/week') }"><a href="/profile/week">Week</a></li>
+                    <li ng-class="{ active: isActive('/profile/day') }"><a href="/profile/day">Day</a></li>
+                </ul>
+            </div>
+
+            <div class="cl"></div>
+        </div>
+
+        <div data-ng-view=""></div>
+    </div>
+
+<!--     <div id="calendar_container" class="container" data-ng-controller="CalendarController">
+        <h3>Calendar</h3>
+    </div>
+
+    <div id="week_container" class="container" data-ng-controller="WeekController">
+        <h3>Week</h3>
+    </div>
+
+    <div id="day_container" class="container" data-ng-controller="DayController">
+        <h3>Day</h3>
+    </div> -->
+    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+
+    <script type="application/javascript" src="/views/controllers/core.js"></script>    
 </body>
 </html>
-
