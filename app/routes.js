@@ -45,6 +45,12 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/calendar', isLoggedIn, function(req, res) {
+        res.render('calendar.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });    
+
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/calendar', // redirect to the secure profile section

@@ -1,21 +1,26 @@
 <!-- views/profile.ejs -->
 <!doctype html>
-<html>
+<html data-ng-app="">
 <head>
 	<title>Calendar</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		body { padding-top:80px; word-wrap:break-word; }
-	</style>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="styles/core.css" />
+
 </head>
 <body>
 
-	<div class="page-header text-center">
+	<div class="top-header">
 		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
 		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
 	</div>
+	<div id="calendar_container" class="container" data-ng-controller="CalendarController">
+		<h3>Calendar</h3>
+	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+	<script src="controllers/calendar.js"></script>
 </body>
 </html>
 
