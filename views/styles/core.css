@@ -11,3 +11,7 @@ body { padding-top:80px; word-wrap:break-word; background-color: #333; text-alig
 .welcome_user { margin-right: 50px; font-size: 18px; font-weight: bold;}
 
 .tiny_italics {text-align: center; font-size: 6px; font-style: italic;}
+
+.blue {color: blue;}
+
+.red {color: red;}
