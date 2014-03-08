@@ -83,6 +83,11 @@ module.exports = function(app, passport) {
         res.redirect('/login');
     });
 
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/login');
+    });
+
     app.get('/', function(req, res) {
         //res.redirect('/index.ejs');
         res.render('index.ejs'); // load the index.ejs file

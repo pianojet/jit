@@ -1,6 +1,6 @@
 <!-- views/profile.ejs -->
 <!doctype html>
-<html data-ng-app="jitapp">
+<html data-ng-app="jitapp_admin">
 <head>
     <title>JIT</title>
     <base href="/" />
@@ -17,31 +17,27 @@
 <body>
     <div class="content_container">
         <div>
-<!--					<p>
-						<strong>id</strong>: <%= user._id %><br>
-						<strong>email</strong>: <%= user.local.email %><br>
-						<strong>password</strong>: <%= user.local.password %>
-					</p>
+<!--                    <p>
+                        <strong>id</strong>: <%= user._id %><br>
+                        <strong>email</strong>: <%= user.local.email %><br>
+                        <strong>password</strong>: <%= user.local.password %>
+                    </p>
 -->
 
             <div class="top-header fr">
                 <a href="/logout" class="btn btn-default btn-sm" target="_self">Logout</a>
             </div>
 
+            <div class="fr red">
+                Admin
+            </div>
+
+            <div class="fr">
+                <a href="/profile" target="_self">Profile</a>
+            </div>
+
             <div class="welcome_user fr">
-            	Welcome <%= user.local.email %>
-           	</div>
-
-
-            <div class="fl">
-                <ul class="nav nav-pills" data-ng-controller="NavController">
-                    <li ng-class="{ active: isActive('/profile/calendar') }"><a href="/profile/calendar">Calendar</a></li>
-                    <li ng-class="{ active: isActive('/profile/week') }"><a href="/profile/week">Week</a></li>
-                    <li ng-class="{ active: isActive('/profile/day') }"><a href="/profile/day">Day</a></li>
-                    <%= if (user.auth.super) { %>
-                    <li ng-class="{ active: isActive('/admin') }"><a href="/admin" target="_self">Admin</a></li>
-                    <%= } %>
-                </ul>
+                Welcome <%= user.local.email %>
             </div>
 
             <div class="cl"></div>
