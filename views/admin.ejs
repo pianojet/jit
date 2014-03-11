@@ -40,6 +40,13 @@
                 Welcome <%= user.local.email %>
             </div>
 
+            <div class="fl">
+                <ul class="nav nav-pills" data-ng-controller="NavController">
+                    <li ng-class="{ active: isActive('/admin/users') }"><a href="/admin/users">Users</a></li>
+                </ul>
+            </div>
+
+
             <div class="cl"></div>
         </div>
 
@@ -51,6 +58,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
 
-    <script type="application/javascript" src="/views/controllers/core.js"></script>    
+    <script type="application/javascript" src="/views/controllers/admin.js"></script>    
 </body>
 </html>

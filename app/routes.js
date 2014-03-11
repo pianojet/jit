@@ -1,16 +1,29 @@
 // app/routes.js
+var util = require('util');
+var user_model = require('./models/user.js');
+
 module.exports = function(app, passport) {
 
-    // =====================================
-    // HOME PAGE (with login links) ========
-    // =====================================
+
+    app.get('/api/users', isSuper, function(req, res){
+        res.contentType('application/json');
+        user_model.find(function(err, data){
+            if (data != null) {
+                res.send(JSON.stringify(data));    
+            }
+        });
+    });
 
     // =====================================
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
 
+    app.get('/public', function(req, res) {
+
+    });
+
+    app.get('/login', function(req, res) {
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -36,7 +49,7 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile/:page(|calendar|week|day)', isLoggedIn, function(req, res) {
+    app.get('/profile/:page(|calendar|week|day)', autoLogIn, function(req, res) {  
         res.render('profile.ejs', {
             page: req.params.page,
             user: req.user // get the user out of session and pass to template
@@ -45,6 +58,20 @@ module.exports = function(app, passport) {
 
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
+            user: req.user // get the user out of session and pass to template
+        });
+    });
+
+    app.get('/admin/users', isSuper, function(req, res) {
+
+        // res.render('admin.ejs', {
+        //     page: req.params.page,
+        //     user: req.user // get the user out of session and pass to template
+        // });
+    });
+
+    app.get('/admin', isSuper, function(req, res) {
+        res.render('admin.ejs', {
             user: req.user // get the user out of session and pass to template
         });
     });    
@@ -88,6 +115,8 @@ module.exports = function(app, passport) {
         res.redirect('/login');
     });
 
+
+
     app.get('/', function(req, res) {
         //res.redirect('/index.ejs');
         res.render('index.ejs'); // load the index.ejs file
@@ -105,3 +134,24 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
+function autoLogIn(req, res, next) {
+    user = user_model.find({'local.email': 'test'}, function(err, userdata){
+        console.log("user:"+util.inspect(userdata));
+        req.login(userdata[0], function(err) {
+          if (err) { 
+            console.log("err:"+err);
+            return next(err); }
+          return next();
+        });    
+    });
+}
+
+// route middleware to make sure a user is logged in
+function isSuper(req, res, next) {
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated() && req.user.auth.super)
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}

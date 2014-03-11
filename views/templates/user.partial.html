@@ -1,3 +1,17 @@
 <div data-ng-controller="UserController">
-    <h3>Week template!!</h3>
+    <h3>User List</h3>
+    <div class="table-responsive" style="width: 50%; text-align: left;">
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Admin</th>
+                <th>Public</th>
+            </thead>
+            <tbody ng-repeat="user in user_list">
+                <td>{{ user.local.email }}</td>
+                <td>{{ user.auth.super }}</td>
+                <td>{{ user.config.public_events }}</td>
+            </tbody>
+        </table>
+    </div>
 </div>

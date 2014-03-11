@@ -31,8 +31,10 @@ var userSchema = mongoose.Schema({
     auth: {
         permissions: {},
         super: Boolean
+    },
+    config: {
+        public_events: Boolean
     }
-
 
 });
 

@@ -4,6 +4,12 @@
   "description": "JET + FIT = JIT",
   "main": "jit-server.js",
   "author": "Justin",
+  "config": {
+    "unsafe-perm":true
+  },  
+  "scripts": {
+    "preinstall": "npm i -g nodemon"
+  },
   "dependencies": {
     "express": "~3.4.4",       
     "ejs": "~0.8.5",         
@@ -15,6 +21,7 @@
     "passport-google-oauth": "~0.1.5",
     "connect-flash": "~0.1.1",   
     "bcrypt-nodejs": "latest",
-    "node-calendar": "latest"
+    "node-calendar": "latest",
+    "nodemon": "1.0.15"
   }
 }

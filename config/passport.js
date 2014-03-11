@@ -17,6 +17,7 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
+        console.log('serializeUser: user='+user.id);
         done(null, user.id);
     });
 
@@ -64,6 +65,8 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.config.public_events = req.body.public_events;
+                newUser.auth.super = false;
 
 				// save the user
                 newUser.save(function(err) {

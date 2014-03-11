@@ -30,6 +30,7 @@
 
             <div class="welcome_user fr">
             	Welcome <%= user.local.email %>
+ 				<% if (user.config.public_events == true) { %>(Public Profile) <% } %>            	
            	</div>
 
 
@@ -38,9 +39,9 @@
                     <li ng-class="{ active: isActive('/profile/calendar') }"><a href="/profile/calendar">Calendar</a></li>
                     <li ng-class="{ active: isActive('/profile/week') }"><a href="/profile/week">Week</a></li>
                     <li ng-class="{ active: isActive('/profile/day') }"><a href="/profile/day">Day</a></li>
-                    <%= if (user.auth.super) { %>
+                    <% if (user.auth.super) { %>
                     <li ng-class="{ active: isActive('/admin') }"><a href="/admin" target="_self">Admin</a></li>
-                    <%= } %>
+                    <% } %>
                 </ul>
             </div>
 
@@ -54,7 +55,7 @@
     <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.min.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
-
+    <script type="application/javascript" src="/views/js/raw_calendar.js"></script>    
     <script type="application/javascript" src="/views/controllers/core.js"></script>    
 </body>
 </html>
