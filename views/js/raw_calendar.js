@@ -1,16 +1,16 @@
 // these are labels for the days of the week
-cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // these are human-readable month name labels, in order
-cal_months_labels = ['January', 'February', 'March', 'April',
+var cal_months_labels = ['January', 'February', 'March', 'April',
                      'May', 'June', 'July', 'August', 'September',
                      'October', 'November', 'December'];
 
 // these are the days of the week for each month, in order
-cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 // this is the current date
-cal_current_date = new Date(); 
+var cal_current_date = new Date();
 
 function Calendar(month, year) {
   this.month = (isNaN(month) || month == null) ? cal_current_date.getMonth() : month;

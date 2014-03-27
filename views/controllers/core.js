@@ -1,4 +1,4 @@
-var jitapp = angular.module("jitapp", ['ngRoute']);
+var jitapp = angular.module("jitapp", ['ngRoute', 'ngSanitize']);
 
 jitapp.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
@@ -22,6 +22,19 @@ jitapp.config([ '$routeProvider', '$locationProvider', function($routeProvider, 
         $locationProvider.html5Mode(true);
 }]);
 
+jitapp.directive('dynamiccalendar', function ($compile) {
+  return {
+    restrict: 'A',
+    replace: true,
+    link: function (scope, ele, attrs) {
+      scope.$watch(attrs.dynamiccalendar, function(html) {
+        ele.html(html);
+        $compile(ele.contents())(scope);
+      });
+    }
+  };
+});
+
 // jitapp.controller('LogoutController', function($location) {
 //     Session.clear();
 //     $location.path('/logout');
@@ -34,6 +47,9 @@ jitapp.controller('NavController', function($scope, $location){
 });
 
 jitapp.controller('CalendarController', function($scope){
+    var cal = new Calendar();
+    cal.generateHTML();
+    $scope.calendar_html = cal.getHTML();
 
 });
 
