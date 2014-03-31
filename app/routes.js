@@ -1,6 +1,7 @@
 // app/routes.js
 var util = require('util');
 var user_model = require('./models/user.js');
+var user_model = require('./models/user.js');
 
 module.exports = function(app, passport) {
 
@@ -50,6 +51,13 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile/:page(|calendar|week|day)', autoLogIn, function(req, res) {  
+        res.render('profile.ejs', {
+            page: req.params.page,
+            user: req.user // get the user out of session and pass to template
+        });
+    });
+
+    app.get('/profile/day/:label/', autoLogIn, function(req, res) {  
         res.render('profile.ejs', {
             page: req.params.page,
             user: req.user // get the user out of session and pass to template

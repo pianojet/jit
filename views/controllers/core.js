@@ -2,20 +2,22 @@ var jitapp = angular.module("jitapp", ['ngRoute', 'ngSanitize']);
 
 jitapp.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/profile/calendar',
+        .when('/profile/calendar/',
         {
             controller: 'CalendarController',
             templateUrl: '/views/templates/calendar.partial.html'
         })
-        .when('/profile/week',
+        .when('/profile/week/',
         {
             controller: 'WeekController',
             templateUrl: '/views/templates/week.partial.html'
         })
-        .when('/profile/day',
+        .when('/profile/day/:label/',
         {
             controller: 'DayController',
-            templateUrl: '/views/templates/day.partial.html'
+            templateUrl: '/views/templates/day.partial.html',
+            resolve: {label: function ($route, dayService) { return dayService.load($route.current.params.label); }}
+
         })
         //.when('/logout', {controller: 'LogoutController'})
         .otherwise({ redirectTo: '/'});
@@ -48,54 +50,48 @@ jitapp.controller('NavController', function($scope, $location){
 
 jitapp.controller('CalendarController', function($scope){
     var cal = new Calendar();
-    cal.generateHTML();
-    $scope.calendar_html = cal.getHTML();
+    cal_data = cal.getMonthData();
+    $scope.month_name = cal_data['month_name'];
+    //$scope.calendar_html = cal.getHTML();
+    var calendar_html = '<table class="calendar-table">';
+    calendar_html += '<tr>';
+    cal_data['month_data_head'].forEach(function(day, index){
+        calendar_html += '<td>'+day+'</td>';
+    })
+    calendar_html += "</tr>";
+    cal_data['month_data'].forEach(function(e1, i1){
+        calendar_html += "<tr>";
+        e1.forEach(function(e2, i2){
+            if (e2 != 'blank') calendar_html += '<td><a href="/profile/day/'+e2+'/">'+e2+'</a></td>';
+            else calendar_html += '<td>-</td>';
+        });
+        calendar_html += "</tr>";
+    });
+    calendar_html += "</table>";
+    $scope.calendar_html = calendar_html;
 
+    //$scope['label_3_1_content'] = '<input type="text" ng-model="test" />{{test}}';
 });
 
 jitapp.controller('WeekController', function($scope){
 
 });
 
-jitapp.controller('DayController', function($scope){
-
+jitapp.controller('DayController', function($scope, dayService){
+    $scope.label = dayService.data.label;
 });
 
-// function NavController($scope, $location) {
-//     $scope.isActive = function (viewLocation) { 
-//         return viewLocation === $location.path();
-//     };    
-// }
-
-// function CalendarController($scope) {
-
-// }
-
-// function WeekController($scope) {
-    
-// }
-
-// function DayController($scope) {
-    
-// }
-
-// var controllers = {};
-
-// controllers.NavController = function($scope) {
-//     // $scope.isActive = function (viewLocation) { 
-//     //     return viewLocation === $location.path();
-//     // };
-// };
-
-// controllers.CalendarController = function($scope) {
-// };
-
-// controllers.WeekController = function($scope) {
-// };
-
-// controllers.DayController = function($scope) {
-// };
-
-// jitapp.controller(controllers);
-
-
+jitapp.factory('dayService', function($q, $timeout){
+    return {
+        data: {},
+        load: function(label) {
+            var defer = $q.defer();
+            var data = this.data;
+            $timeout(function () {
+                data.label = label;
+                defer.resolve(data);
+            }, 1000);            
+            return defer.promise;
+        }
+    };
+});

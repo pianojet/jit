@@ -6,7 +6,7 @@ body { padding-top:80px; word-wrap:break-word; background-color: #333; text-alig
 .fl {float: left;}
 .cl {clear: both;}
 
-.content_container { width: 1000px; background-color: #FF9900; margin: auto;}
+.content_container { width: 1200px; background-color: #FF9900; margin: auto;}
 
 .welcome_user { margin-right: 50px; font-size: 18px; font-weight: bold;}
 
@@ -16,3 +16,5 @@ body { padding-top:80px; word-wrap:break-word; background-color: #333; text-alig
 
 .red {color: red;}
 
+.calendar-table {margin: auto; width: 100%;}
+.calendar-table td {border: 1px solid black;}
